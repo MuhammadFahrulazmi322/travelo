@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 const config: Config = {
   mode:"jit",
@@ -9,6 +10,18 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'montserrat': ["var(--font-montserrat)"],
+        'roboto': ["var(--font-roboto)"],
+      },
+      fontSize: {
+        'heading-1' :'48px',
+        'heading-2' :'36px',
+        'heading-3' :'24px',
+        'heading-4' :'18px',
+        'heading-5' :'14px',
+        'heading-6' :'12px',
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
