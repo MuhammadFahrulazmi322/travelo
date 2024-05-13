@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CustomizedInputBase from "./SearchInput";
+import { Button } from "@mui/material";
 
 function Nav() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -14,27 +15,6 @@ function Nav() {
   const handleToggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = links.map((link) => document.getElementById(link.toLowerCase().replace(/\s+/g, '')));
-      const viewportHeight = window.innerHeight;
-
-      for (let i = 0; i < sections.length; i++) {
-        const section = sections[i];
-        if (!section) continue;
-        
-        const rect = section.getBoundingClientRect();
-        if (rect.top >= 0 && rect.bottom <= viewportHeight) {
-          setActiveSection(section.id);
-          break;
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
     <header className="px-4 lg:px-12 md:py-4 w-full">
@@ -50,9 +30,19 @@ function Nav() {
           {links.map((item, index) => (
             <li key={index}>
               <Link
-                href={`#${item.replace(/\s+/g, '').toLowerCase()}`}
-                className={`text-sm 2xl-text-base uppercase font-bold ${activeSection === item.replace(/\s+/g, '').toLowerCase() ? "text-black" : ""}`}
-                onClick={() => setActiveSection(item.replace(/\s+/g, '').toLowerCase())}
+                href={
+                  item === "Beranda"
+                    ? "/"
+                    : `/${item.replace(/\s+/g, "").toLowerCase()}`
+                }
+                className={`text-sm 2xl-text-base capitalize font-bold ${
+                  activeSection === item.replace(/\s+/g, "").toLowerCase()
+                    ? "text-black"
+                    : ""
+                }`}
+                onClick={() =>
+                  setActiveSection(item.replace(/\s+/g, "").toLowerCase())
+                }
               >
                 {item}
               </Link>
@@ -60,6 +50,14 @@ function Nav() {
           ))}
         </ul>
 
+        <div className="lg:block hidden">
+          <Button
+            variant="contained"
+            className="bg-primary text-white font-bold"
+          >
+            Masuk
+          </Button>
+        </div>
         <div className="lg:hidden md:block ">
           <Image
             src="/icons/iconHumburger.svg"
@@ -79,15 +77,25 @@ function Nav() {
           <div className="flex items-center justify-center ">
             <ul
               id="mobileMenu"
-              className=" mt-12 md:mt-20 w-[80%] bg-black px-4 py-4 flex flex-col gap-6 rounded-lg shadow-md"
+              className=" mt-12 md:mt-20 w-[80%] bg-primary-blue px-4 py-4 flex flex-col gap-6 rounded-lg shadow-md"
             >
               <div className="flex flex-col gap-6 border-b-2 border-gray py-4 px-4 items-center text-white ">
-                {links.map((item, index) => (
+                {links.concat(["Masuk"]).map((item, index) => (
                   <li key={index}>
                     <Link
-                      href={`#${item.replace(" ", "").toLowerCase() === "hallof fame" ? "halloffame" : item.replace(" ", "").toLowerCase()}`}
-                      className={`text-sm hover:text-black font-medium ${activeSection === item.replace(" ", "").toLowerCase() ? "text-black" : ""}`}
-                      onClick={() => handleToggleMobileMenu()}
+                      href={
+                        item === "Beranda"
+                          ? "/"
+                          : `/${item.replace(/\s+/g, "").toLowerCase()}`
+                      }
+                      className={`text-sm 2xl-text-base capitalize font-bold ${
+                        activeSection === item.replace(/\s+/g, "").toLowerCase()
+                          ? "text-black"
+                          : ""
+                      }`}
+                      onClick={() =>
+                        setActiveSection(item.replace(/\s+/g, "").toLowerCase())
+                      }
                     >
                       {item}
                     </Link>
