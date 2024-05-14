@@ -26,6 +26,7 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "card-section": "url(/images/bg-card.png)",
       },
       colors:{
         primary:{
@@ -76,4 +77,5 @@ const config: Config = {
   },
   plugins: [],
 };
+
 export default config;
