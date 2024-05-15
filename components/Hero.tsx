@@ -7,15 +7,15 @@ import { motion } from "framer-motion";
 const Hero = () => {
   return (
     <motion.section
-      whileInView={{ x: [100, 0], opacity: [0, 1] }}
+      whileInView={{ y: [100, 0], opacity: [0, 1] }}
       transition={{ duration: 1 }}
-      className="flex flex-col lg:flex-row items-center overflow-hidden min-h-screen"
+      className="flex flex-col lg:flex-row items-center py-10"
     >
       <div className="flex flex-col items-start px-8 lg:px-20  gap-y-6 order-2 lg:order-1">
-        <h1 className="text-heading-3 lg:text-heading-2 font-bold">
+        <h1 className="text-heading-3 xl:text-heading-2 font-bold">
           Jelajahi Dunia Yang Indah Dengan Satu Sentuhan
         </h1>
-        <p className="text-heading-5lg:text-heading-4 leading-8 font-roboto text-gray-70">
+        <p className="text-heading-5 xl:text-heading-4 leading-8 font-roboto text-gray-70">
           Jelajahi dunia yang indah dengan satu sentuhan dengan pesan tiket di
           Travel kamu akan dapatkan pelayanan terbaik untuk wisata liburanmu
           kemana saja dan kapan saja
@@ -28,9 +28,9 @@ const Hero = () => {
       <Image
         src="/images/Header Image.png"
         alt="hero"
-        width={500}
-        height={500}
-        className="order-1 lg:order-2"
+        width={600}
+        height={600}
+        className="order-1 lg:order-2 xl:w-[700px] xl:h-[700px]"
       />
     </motion.section>
   );

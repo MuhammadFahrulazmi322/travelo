@@ -17,7 +17,7 @@ function Nav() {
   };
 
   return (
-    <header className="px-4 lg:px-12 md:py-4 w-full fixed z-20 bg-white">
+    <header className="px-4 lg:px-12 md:py-4 fixed z-20 bg-white w-full max-w-[1440px]">
       <nav className="flex items-center gap-6 justify-between">
         <Image
           src="/icons/travelo.svg"

@@ -4,5 +4,16 @@
 
   body{
     font-family: var(--font-montserrat);
+    max-width: 1440px;
+    margin: 0 auto;
 
   }
+
+  @layer components {
+    .max-container {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+  }
+  

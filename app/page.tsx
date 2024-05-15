@@ -1,3 +1,4 @@
+import Card from "@/components/Card";
 import Count from "@/components/Count";
 import Hero from "@/components/Hero";
 import PromoCarousel from "@/components/PromoCarousel";
@@ -9,8 +10,10 @@ export default function Home() {
     <main>
       <Hero/>
       <Count/>
-      <section className="bg-card-section h-full">
+      <section className="bg-card-section bg-no-repeat bg-top h-full my-20">
         <PromoCarousel/>
+        <Card/>
+        
       </section>
     </main>
   );

@@ -68,7 +68,7 @@ const CountItem: React.FC<CountItemProps> = ({ value, label }) => {
       <motion.h3 className='text-heading-3 font-bold'>
         +{displayCount}
       </motion.h3>
-      <p className='text-heading-5 font-roboto'>{label}</p>
+      <p className='text-heading-5 text-gray-70 font-roboto'>{label}</p>
     </div>
   );
 };
