@@ -17,12 +17,12 @@ function Nav() {
   };
 
   return (
-    <header className="px-4 lg:px-12 md:py-4 fixed z-20 bg-white w-full max-w-[1440px]">
+    <header className="px-4 lg:px-12 md:py-4 fixed z-20 bg-white w-full max-w-[1440px] m-0">
       <nav className="flex items-center gap-6 justify-between">
         <Image
-          src="/icons/travelo.svg"
-          alt="Travelo"
-          width={100}
+          src="/icons/Journey.svg"
+          alt="Journey"
+          width={150}
           height={148}
         />
         <CustomizedInputBase />

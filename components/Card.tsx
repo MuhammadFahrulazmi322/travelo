@@ -14,7 +14,7 @@ const Card = () => {
           Paket terbaik yang sering dipilih pelanggan
         </p>
       </div>
-      <div className="flex flex-col gap-y-4 md:flex-row gap-x-8">
+      <div className="flex flex-col gap-y-4 md:flex-row gap-x-8 justify-center">
         <article className="w-[393px] h-auto bg-white rounded-[10px] flex flex-col gap-y-4 shadow-2xl">
           <Image
             src="/images/image-card.png"

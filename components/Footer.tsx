@@ -11,7 +11,7 @@ const Footer = () => {
             alt="logo"
             width={70}
             height={48}
-            className="lg:w-[80px] " 
+            className="lg:w-[100px] " 
           />
         </div>
         <div className="flex flex-wrap lg:flex-row gap-x-24 gap-y-4 ">
@@ -41,7 +41,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="bg-primary-blue text-white flex items-center justify-center py-2">
-        <p className="text-sm">Copyright 2020 Travelo. All Right Reserved</p>
+        <p className="text-sm">Copyright 2020 journey. All Right Reserved</p>
       </div>
     </footer>
   );
