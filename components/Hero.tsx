@@ -9,7 +9,7 @@ const Hero = () => {
     <motion.section
       whileInView={{ y: [100, 0], opacity: [0, 1] }}
       transition={{ duration: 1 }}
-      className="flex flex-col lg:flex-row items-center py-10"
+      className="flex flex-col lg:flex-row items-center"
     >
       <div className="flex flex-col items-start px-8 lg:px-20  gap-y-6 order-2 lg:order-1">
         <h1 className="text-heading-3 xl:text-heading-2 font-bold">
@@ -17,7 +17,7 @@ const Hero = () => {
         </h1>
         <p className="text-heading-5 xl:text-heading-4 leading-8 font-roboto text-gray-70">
           Jelajahi dunia yang indah dengan satu sentuhan dengan pesan tiket di
-          Travel kamu akan dapatkan pelayanan terbaik untuk wisata liburanmu
+          Journey kamu akan dapatkan pelayanan terbaik untuk wisata liburanmu
           kemana saja dan kapan saja
         </p>
 

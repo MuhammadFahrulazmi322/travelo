@@ -1,4 +1,5 @@
 import Card from "@/components/Card";
+import Category from "@/components/Category";
 import Count from "@/components/Count";
 import Hero from "@/components/Hero";
 import PromoCarousel from "@/components/PromoCarousel";
@@ -9,15 +10,16 @@ import "react-multi-carousel/lib/styles.css";
 export default function Home() {
   return (
     <main>
+      <section className="flex flex-col gap-y-[100px]">
       <Hero/>
       <Count/>
-      <section className="bg-card-section bg-no-repeat bg-top h-full my-20">
+      <div className="bg-card-section bg-no-repeat bg-top h-full py-8 mt-20">
         <PromoCarousel/>
         <Card/>
-        
-      </section>
-
+      </div>
+      <Category/>
       <Testimonials/>
+      </section>
 
     </main>
   );

@@ -25,7 +25,7 @@ const Count: React.FC = () => {
         hidden: { opacity: 0 },
         visible: { opacity: 1, transition: { duration: 1, delay: 0.5 } }
       }}
-      className='flex flex-wrap lg:flex-row items-center justify-center gap-x-5 lg:gap-x-32 gap-y-4 px-8 py-12'>
+      className='flex flex-wrap lg:flex-row items-center justify-center gap-x-5 lg:gap-x-32 gap-y-4 px-8'>
       {data.map((item, index) => (
         <CountItem key={index} value={item.value} label={item.label} />
       ))}
@@ -65,7 +65,7 @@ const CountItem: React.FC<CountItemProps> = ({ value, label }) => {
 
   return (
     <div ref={ref} className='flex flex-col items-center gap-y-4'>
-      <motion.h3 className='text-heading-3 lg:text-heading-2 font-bold '>
+      <motion.h3 className='text-heading-3 lg:text-heading-2 font-bold font-montserrat '>
         +{displayCount}
       </motion.h3>
       <p className='text-heading-5 lg:text-heading-4 text-gray-70 font-roboto'>{label}</p>

@@ -71,17 +71,17 @@ const Testimonials: React.FC = () => {
     <motion.section
       whileInView={{ y: [100, 0], opacity: [0, 1] }}
       transition={{ duration: 0.5 }}
-      className="px-12"
+      className="px-8"
     >
         <div>
             <h1 className="font-bold text-heading-3">Testimoni Pelanggan</h1>
             <p>Pendapat pelanggan tentang kami</p>
         </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-[30px] ">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-[30px] justify-center ">
         {testimonialsData.map((testimonial, index) => (
           <div
             key={index}
-            className=" flex flex-col p-4 lg:p-[50px] gap-y-4  w-[288px]"
+            className=" flex flex-col p-4 py-12 gap-y-4"
           >
             <div className="flex flex-row items-center gap-x-4 justify-between">
               <div className="flex flex-row items-center gap-x-4">

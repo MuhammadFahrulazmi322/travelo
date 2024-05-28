@@ -16,7 +16,7 @@ const config: Config = {
       },
       fontSize: {
         'heading-1' :'48px',
-        'heading-2' :'36px',
+        'heading-2' :'32px',
         'heading-3' :'24px',
         'heading-4' :'18px',
         'heading-5' :'14px',
