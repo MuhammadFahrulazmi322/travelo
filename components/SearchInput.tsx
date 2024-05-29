@@ -10,7 +10,7 @@ export default function CustomizedInputBase() {
     >
       <InputBase
         className='ml-4'
-        placeholder="Kategori | Lokasi"
+        placeholder="Search"
         inputProps={{ 'aria-label': 'search google maps' }}
       />
       <IconButton type="button"

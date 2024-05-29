@@ -11,7 +11,7 @@ const Footer = () => {
             alt="logo"
             width={70}
             height={48}
-            className="lg:w-[100px] " 
+            className="lg:w-[100px] hidden lg:block" 
           />
         </div>
         <div className="flex flex-wrap lg:flex-row gap-x-24 gap-y-4 ">

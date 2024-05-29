@@ -5,8 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import CustomizedInputBase from "./SearchInput";
 import { Button } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 function Nav() {
+  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
@@ -19,12 +21,14 @@ function Nav() {
   return (
     <header className="px-4 lg:px-12 md:py-4 fixed z-20 bg-white w-full max-w-[1440px] m-0">
       <nav className="flex items-center gap-6 justify-between">
-        <Image
-          src="/icons/Journey.svg"
-          alt="Journey"
-          width={150}
-          height={148}
-        />
+        <Link href="/">
+          <Image
+            src="/icons/Journey.svg"
+            alt="Journey"
+            width={120}
+            height={148}
+          />
+        </Link>
         <CustomizedInputBase />
         <ul className="flex-1 flex justify-end items-center gap-6 max-lg:hidden text-gray-70 ">
           {links.map((item, index) => (
@@ -53,10 +57,25 @@ function Nav() {
         <div className="lg:block hidden">
           <Button
             variant="contained"
-            className="bg-primary text-white font-bold"
+            className="bg-primary text-heading-5 capitalize font-montserrat text-white font-bold"
+            onClick={() => {
+              setActiveSection("");
+              router.push("/login");
+            }}
           >
             Masuk
           </Button>
+          {/* When user login */}
+
+          {/* <Button
+            className="rounded-full"
+            onClick={() => {
+              setActiveSection("");
+              router.push("/profile");
+            }}
+          >
+            <Image src="/images/testi1.png" alt="user" width={50} height={50} />
+          </Button> */}
         </div>
         <div className="lg:hidden md:block ">
           <Image
@@ -67,6 +86,13 @@ function Nav() {
             onClick={handleToggleMobileMenu}
             className="cursor-pointer pt-4"
           />
+          {/* When user login */}
+          {/* <Button
+            className="rounded-full"
+            onClick={handleToggleMobileMenu}
+          >
+            <Image src="/images/testi1.png" alt="user" width={36} height={36} />
+          </Button> */}
         </div>
       </nav>
       {isMobileMenuOpen && (

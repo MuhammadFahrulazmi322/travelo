@@ -26,7 +26,7 @@ const Hero = () => {
         </Button>
       </div>
       <Image
-        src="/images/Header Image.png"
+        src="/images/Header Image.svg"
         alt="hero"
         width={600}
         height={600}

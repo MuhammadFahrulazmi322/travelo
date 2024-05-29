@@ -5,6 +5,7 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import { ArrowLeft, ArrowRight } from "@mui/icons-material";
 import "react-multi-carousel/lib/styles.css";
+import Link from "next/link";
 
 const PromoCarousel = () => {
   const responsive = {
@@ -125,26 +126,28 @@ const PromoCarousel = () => {
         responsive={responsive}
       >
         {cards.map((card) => (
-          <div key={card.id} className="w-[250px] h-[400px] lg:w-[500px] lg:h-[300px] flex flex-col lg:flex-row bg-white rounded-xl shadow-lg">
-            <img src={card.image} alt={card.judul} className="w-full lg:w-[200px] h-[150px] lg:h-full object-cover lg:rounded-r-none rounded-md mb-4" />
-            <div className="flex flex-col p-4 gap-y-4">
-              <div className=" flex flex-col gap-y-2">
-                <h4 className="text-sm lg:text-[18px] font-montserrat font-bold">{card.judul}</h4>
-                <p className="text-sm lg:text-[18px] font-montserrat text-gray-70 ">{card.lokasi}</p>
-              </div>
-              <div className=" flex flex-col gap-y-2 lg:mb-2">
-                <div className="flex flex-row gap-x-2">
-                  <p className="text-[16px] text-gray-70  line-through">{`Rp ${card.hargaNormal.toLocaleString()}`}</p>
-                  <p className="text-[16px] text-red-100 font-bold">{`${hitungDiskon(card.hargaNormal, card.hargaPromo)}%`}</p>
+          <Link href={`/paket/${card.id}`} key={card.id}>
+            <div key={card.id} className="w-[250px] h-[400px] lg:w-[500px] lg:h-[300px] flex flex-col lg:flex-row bg-white rounded-xl shadow-lg cursor-pointer">
+              <img src={card.image} alt={card.judul} className="w-full lg:w-[200px] h-[150px] lg:h-full object-cover lg:rounded-r-none rounded-md mb-4" />
+              <div className="flex flex-col p-4 gap-y-4">
+                <div className=" flex flex-col gap-y-2">
+                  <h4 className="text-sm lg:text-[18px] font-montserrat font-bold">{card.judul}</h4>
+                  <p className="text-sm lg:text-[18px] font-montserrat text-gray-70 ">{card.lokasi}</p>
                 </div>
-                <p className="text-[16px] text-gray-600 font-bold">{`Rp ${card.hargaPromo.toLocaleString()}`}</p>
-              </div>
-              <div className=" flex flex-col gap-y-4">
-                <p className="text-[14px] text-gray-70 line-clamp-2  lg:line-clamp-3 overflow-hidden">{card.deskripsi}</p>
-                <p className="text-[14px] text-gray-50 ">Berangkat : {card.keberangkatan}</p>
+                <div className=" flex flex-col gap-y-2 lg:mb-2">
+                  <div className="flex flex-row gap-x-2">
+                    <p className="text-[16px] text-gray-70  line-through">{`Rp ${card.hargaNormal.toLocaleString()}`}</p>
+                    <p className="text-[16px] text-red-100 font-bold">{`${hitungDiskon(card.hargaNormal, card.hargaPromo)}%`}</p>
+                  </div>
+                  <p className="text-[16px] text-gray-600 font-bold">{`Rp ${card.hargaPromo.toLocaleString()}`}</p>
+                </div>
+                <div className=" flex flex-col gap-y-4">
+                  <p className="text-[14px] text-gray-70 line-clamp-2  lg:line-clamp-3 overflow-hidden">{card.deskripsi}</p>
+                  <p className="text-[14px] text-gray-50 ">Berangkat : {card.keberangkatan}</p>
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </Carousel>
     </section>
