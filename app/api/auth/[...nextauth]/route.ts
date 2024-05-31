@@ -4,7 +4,7 @@ import { NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-
+import { NextApiRequest, NextApiResponse } from 'next';
 
 interface User {
   email: string;
@@ -16,15 +16,11 @@ interface User {
 }
 
 const authOptions: NextAuthOptions = {
-  // Configure one or more authentication providers
   session: {
     strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
-
-  //providers it connection to Auth0, google etc
   providers: [
-    // using credential
     CredentialsProvider({
       type: "credentials",
       name: "credentials",
@@ -32,16 +28,13 @@ const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      //authorization
       async authorize(credentials) {
         const { email, password } = credentials as {
           email: string;
           password: string;
         };
 
-        const user: any = await signIn({
-          email,
-        });
+        const user: any = await signIn({ email });
         if (user) {
           const passwordConfirm = await compare(password, user.password);
           if (passwordConfirm) {
@@ -56,9 +49,13 @@ const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_OAUTH_CLIENT_ID || "",
       clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET || "",
+      authorization: {
+        params: {
+          redirect_uri: `${process.env.NEXTAUTH_URL}/api/auth/callback/google`
+        }
+      }
     }),
   ],
-
   callbacks: {
     async jwt({ token, account, user }: any) {
       if (account?.provider === "credentials") {
@@ -85,7 +82,6 @@ const authOptions: NextAuthOptions = {
       }
       return token;
     },
-
     async session({ session, token }: any) {
       if ("email" in token) {
         session.user.email = token.email;
@@ -107,4 +103,10 @@ const authOptions: NextAuthOptions = {
   },
 };
 
-export default NextAuth(authOptions);
+export async function GET(req: NextApiRequest, res: NextApiResponse) {
+  return NextAuth(req, res, authOptions);
+}
+
+export async function POST(req: NextApiRequest, res: NextApiResponse) {
+  return NextAuth(req, res, authOptions);
+}

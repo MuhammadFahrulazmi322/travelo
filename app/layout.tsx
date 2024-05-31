@@ -3,6 +3,7 @@ import { montserrat, roboto } from "./fonts";
 import "./globals.css";
 import Nav from "../components/Navbar";
 import Footer from "@/components/Footer";
+import NextAuthProvider from "@/context/NextAuthProvider";
 
 
 export const metadata: Metadata = {
@@ -18,9 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${montserrat.variable} ${roboto.variable}`}>
       <body >
+      <NextAuthProvider>
         <Nav />
         {children}
         <Footer/>
+      </NextAuthProvider>
       </body>
     </html>
   );

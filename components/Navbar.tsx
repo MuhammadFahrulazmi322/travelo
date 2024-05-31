@@ -6,8 +6,10 @@ import Link from "next/link";
 import CustomizedInputBase from "./SearchInput";
 import { Button } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
 
 function Nav() {
+  const { data }: any = useSession();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -54,17 +56,38 @@ function Nav() {
           ))}
         </ul>
 
-        <div className="lg:block hidden">
-          <Button
-            variant="contained"
-            className="bg-primary text-heading-5 capitalize font-montserrat text-white font-bold"
-            onClick={() => {
-              setActiveSection("");
-              router.push("/login");
-            }}
-          >
-            Masuk
-          </Button>
+        {data && data.user.image && (
+            <Image
+              width={32}
+              height={32}
+              src={data.user.image}
+              alt={data.user.fullname}
+              className="rounded-full"
+            />
+          )}
+        <div className="lg:flex hidden flex-row items-center gap-6">
+          {data ? (
+            <Button
+              variant="contained"
+              className="bg-primary text-heading-5 capitalize font-montserrat text-white font-bold"
+              onClick={() => signOut()}
+            >
+              Keluar
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              className="bg-primary text-heading-5 capitalize font-montserrat text-white font-bold"
+              onClick={() => {
+                setActiveSection("");
+                router.push("/auth/login");
+              }}
+            >
+              Masuk
+            </Button>
+          )}
+
+          
           {/* When user login */}
 
           {/* <Button
