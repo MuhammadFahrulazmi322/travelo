@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CustomizedInputBase from "./SearchInput";
@@ -14,10 +14,38 @@ function Nav() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
-  const links = ["Beranda", "Kontak", "Paket", "Testimonial"];
+  const links = [
+    {
+      name: "Beranda",
+      link: "/",
+    },
+    {
+      name: "Kontak",
+      link: "/kontak",
+    },
+    {
+      name: "Paket",
+      link: "/paket",
+    },
+    {
+      name: "Testimonial",
+      link: "#testimonial",
+    },
+  ];
 
   const handleToggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const handleLinkClick = (link: string) => {
+    if (link.startsWith("#")) {
+      const element = document.querySelector(link);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      router.push(link);
+    }
   };
 
   return (
@@ -35,36 +63,32 @@ function Nav() {
         <ul className="flex-1 flex justify-end items-center gap-6 max-lg:hidden text-gray-70 ">
           {links.map((item, index) => (
             <li key={index}>
-              <Link
-                href={
-                  item === "Beranda"
-                    ? "/"
-                    : `/${item.replace(/\s+/g, "").toLowerCase()}`
-                }
+              <a
+                href={item.link}
                 className={`text-sm 2xl-text-base capitalize font-bold ${
-                  activeSection === item.replace(/\s+/g, "").toLowerCase()
-                    ? "text-black"
-                    : ""
+                  activeSection === item.link ? "text-black" : ""
                 }`}
-                onClick={() =>
-                  setActiveSection(item.replace(/\s+/g, "").toLowerCase())
-                }
+                onClick={(e) => {
+                  e.preventDefault();
+                  setActiveSection(item.link);
+                  handleLinkClick(item.link);
+                }}
               >
-                {item}
-              </Link>
+                {item.name}
+              </a>
             </li>
           ))}
         </ul>
-
+        {/* When user login */}
         {data && data.user.image && (
-            <Image
-              width={32}
-              height={32}
-              src={data.user.image}
-              alt={data.user.fullname}
-              className="rounded-full"
-            />
-          )}
+          <Image
+            width={32}
+            height={32}
+            src={data.user.image}
+            alt={data.user.fullname}
+            className="rounded-full"
+          />
+        )}
         <div className="lg:flex hidden flex-row items-center gap-6">
           {data ? (
             <Button
@@ -86,19 +110,6 @@ function Nav() {
               Masuk
             </Button>
           )}
-
-          
-          {/* When user login */}
-
-          {/* <Button
-            className="rounded-full"
-            onClick={() => {
-              setActiveSection("");
-              router.push("/profile");
-            }}
-          >
-            <Image src="/images/testi1.png" alt="user" width={50} height={50} />
-          </Button> */}
         </div>
         <div className="lg:hidden md:block ">
           <Image
@@ -109,13 +120,6 @@ function Nav() {
             onClick={handleToggleMobileMenu}
             className="cursor-pointer pt-4"
           />
-          {/* When user login */}
-          {/* <Button
-            className="rounded-full"
-            onClick={handleToggleMobileMenu}
-          >
-            <Image src="/images/testi1.png" alt="user" width={36} height={36} />
-          </Button> */}
         </div>
       </nav>
       {isMobileMenuOpen && (
@@ -129,27 +133,30 @@ function Nav() {
               className=" mt-12 md:mt-20 w-[80%] bg-primary-blue px-4 py-4 flex flex-col gap-6 rounded-lg shadow-md"
             >
               <div className="flex flex-col gap-6 border-b-2 border-gray py-4 px-4 items-center text-white ">
-                {links.concat(["Masuk"]).map((item, index) => (
-                  <li key={index}>
-                    <Link
-                      href={
-                        item === "Beranda"
-                          ? "/"
-                          : `/${item.replace(/\s+/g, "").toLowerCase()}`
-                      }
-                      className={`text-sm 2xl-text-base capitalize font-bold ${
-                        activeSection === item.replace(/\s+/g, "").toLowerCase()
-                          ? "text-black"
-                          : ""
-                      }`}
-                      onClick={() =>
-                        setActiveSection(item.replace(/\s+/g, "").toLowerCase())
-                      }
-                    >
-                      {item}
-                    </Link>
-                  </li>
-                ))}
+                {links
+                  .concat([
+                    {
+                      name: "Masuk",
+                      link: "/auth/login",
+                    },
+                  ])
+                  .map((item, index) => (
+                    <li key={index}>
+                      <a
+                        href={item.name === "Beranda" ? "/" : `${item.link}`}
+                        className={`text-sm 2xl-text-base capitalize font-bold ${
+                          activeSection === item.link ? "text-black" : ""
+                        }`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setActiveSection(item.link);
+                          handleLinkClick(item.link);
+                        }}
+                      >
+                        {item.name}
+                      </a>
+                    </li>
+                  ))}
               </div>
             </ul>
           </div>

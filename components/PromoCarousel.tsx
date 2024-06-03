@@ -7,28 +7,28 @@ import { ArrowLeft, ArrowRight } from "@mui/icons-material";
 import "react-multi-carousel/lib/styles.css";
 import Link from "next/link";
 
-const PromoCarousel = () => {
+const PromoCarousel = ({ style }: any) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1143 },
       items: 3,
-      partialVisibilityGutter: -120 // this is needed to tell the amount of px that should be visible.
+      partialVisibilityGutter: -80, // this is needed to tell the amount of px that should be visible.
     },
     minidesktop: {
       breakpoint: { max: 1143, min: 1024 },
       items: 2,
-      partialVisibilityGutter: -60 // this is needed to tell the amount of px that should be visible.
+      partialVisibilityGutter: -60, // this is needed to tell the amount of px that should be visible.
     },
     tablet: {
       breakpoint: { max: 768, min: 464 },
       items: 2,
-      partialVisibilityGutter: -80 // this is needed to tell the amount of px that should be visible.
+      partialVisibilityGutter: -80, // this is needed to tell the amount of px that should be visible.
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
       items: 1,
-      partialVisibilityGutter: 60 // this is needed to tell the amount of px that should be visible.
-    }
+      partialVisibilityGutter: 60, // this is needed to tell the amount of px that should be visible.
+    },
   };
 
   const CustomRightArrow = ({ onClick }: { onClick?: () => void }) => (
@@ -56,9 +56,10 @@ const PromoCarousel = () => {
       lokasi: "Indonesia",
       hargaPromo: 2000000,
       hargaNormal: 3500000,
-      deskripsi: "Untuk 2 Orang, tiket pesawat, penginapan 5 malam, tour guide, makan siang, makan malam dan sebagainya",
+      deskripsi:
+        "Untuk 2 Orang, tiket pesawat, penginapan 5 malam, tour guide, makan siang, makan malam dan sebagainya",
       keberangkatan: "15 Juni 2024",
-      image: "/images/candi.png" // Ganti dengan path gambar yang sesuai
+      image: "/images/candi.png", // Ganti dengan path gambar yang sesuai
     },
     {
       id: 2,
@@ -66,9 +67,10 @@ const PromoCarousel = () => {
       lokasi: "Italy",
       hargaPromo: 14130000,
       hargaNormal: 15700000,
-      deskripsi: "Untuk 2 Orang, tiket pesawat, penginapan 5 malam, tour guide, makan siang, makan malam dan sebagainya",
+      deskripsi:
+        "Untuk 2 Orang, tiket pesawat, penginapan 5 malam, tour guide, makan siang, makan malam dan sebagainya",
       keberangkatan: "27 Nov 2024",
-      image: "/images/colloseum.png" // Ganti dengan path gambar yang sesuai
+      image: "/images/colloseum.png", // Ganti dengan path gambar yang sesuai
     },
     {
       id: 3,
@@ -76,9 +78,10 @@ const PromoCarousel = () => {
       lokasi: "France",
       hargaPromo: 20250000,
       hargaNormal: 22500000,
-      deskripsi: "Untuk 2 Orang, tiket pesawat, penginapan 5 malam, tour guide, makan siang, makan malam dan sebagainya",
+      deskripsi:
+        "Untuk 2 Orang, tiket pesawat, penginapan 5 malam, tour guide, makan siang, makan malam dan sebagainya",
       keberangkatan: "15 Juni 2024",
-      image: "/images/menara_eifell.png" // Ganti dengan path gambar yang sesuai
+      image: "/images/menara_eifell.png", // Ganti dengan path gambar yang sesuai
     },
     {
       id: 4,
@@ -86,9 +89,10 @@ const PromoCarousel = () => {
       lokasi: "Indonesia",
       hargaPromo: 2000000,
       hargaNormal: 3500000,
-      deskripsi: "Untuk 2 Orang, tiket pesawat, penginapan 5 malam, tour guide, makan siang, makan malam dan sebagainya",
+      deskripsi:
+        "Untuk 2 Orang, tiket pesawat, penginapan 5 malam, tour guide, makan siang, makan malam dan sebagainya",
       keberangkatan: "15 Juni 2024",
-      image: "/images/candi.png" // Ganti dengan path gambar yang sesuai
+      image: "/images/candi.png", // Ganti dengan path gambar yang sesuai
     },
     {
       id: 5,
@@ -96,21 +100,24 @@ const PromoCarousel = () => {
       lokasi: "Indonesia",
       hargaPromo: 2000000,
       hargaNormal: 3500000,
-      deskripsi: "Untuk 2 Orang, tiket pesawat, penginapan 5 malam, tour guide, makan siang, makan malam dan sebagainya",
+      deskripsi:
+        "Untuk 2 Orang, tiket pesawat, penginapan 5 malam, tour guide, makan siang, makan malam dan sebagainya",
       keberangkatan: "15 Juni 2024",
-      image: "/images/candi.png" // Ganti dengan path gambar yang sesuai
+      image: "/images/candi.png", // Ganti dengan path gambar yang sesuai
     },
   ];
 
   // Fungsi untuk menghitung persentase diskon
-  const hitungDiskon = (hargaNormal : number, hargaPromo : number) => {
+  const hitungDiskon = (hargaNormal: number, hargaPromo: number) => {
     const diskon = ((hargaNormal - hargaPromo) / hargaNormal) * 100;
     return diskon.toFixed(0); // Membulatkan hasil ke 2 desimal
   };
 
   return (
     <section className="px-8">
-      <h3 className="text-heading-3 font-bold font-montserrat pt-14 mb-4 text-white">
+      <h3
+        className={`text-heading-3 font-bold font-montserrat pt-14 mb-4  ${style}`}
+      >
         Promo Liburan
       </h3>
       <Carousel
@@ -127,23 +134,41 @@ const PromoCarousel = () => {
       >
         {cards.map((card) => (
           <Link href={`/paket/${card.id}`} key={card.id}>
-            <div key={card.id} className="w-[250px] h-[400px] lg:w-[500px] lg:h-[300px] flex flex-col lg:flex-row bg-white rounded-xl shadow-lg cursor-pointer">
-              <img src={card.image} alt={card.judul} className="w-full lg:w-[200px] h-[150px] lg:h-full object-cover lg:rounded-r-none rounded-md mb-4" />
+            <div
+              key={card.id}
+              className="w-[250px] h-[400px] lg:w-[500px] lg:h-[300px] flex flex-col lg:flex-row bg-white rounded-xl shadow-xl cursor-pointer"
+            >
+              <img
+                src={card.image}
+                alt={card.judul}
+                className="w-full lg:w-[200px] h-[150px] lg:h-full object-cover lg:rounded-r-none rounded-md mb-4"
+              />
               <div className="flex flex-col p-4 gap-y-4">
                 <div className=" flex flex-col gap-y-2">
-                  <h4 className="text-sm lg:text-[18px] font-montserrat font-bold">{card.judul}</h4>
-                  <p className="text-sm lg:text-[18px] font-montserrat text-gray-70 ">{card.lokasi}</p>
+                  <h4 className="text-sm lg:text-[18px] font-montserrat font-bold">
+                    {card.judul}
+                  </h4>
+                  <p className="text-sm lg:text-[18px] font-montserrat text-gray-70 ">
+                    {card.lokasi}
+                  </p>
                 </div>
                 <div className=" flex flex-col gap-y-2 lg:mb-2">
                   <div className="flex flex-row gap-x-2">
                     <p className="text-[16px] text-gray-70  line-through">{`Rp ${card.hargaNormal.toLocaleString()}`}</p>
-                    <p className="text-[16px] text-red-100 font-bold">{`${hitungDiskon(card.hargaNormal, card.hargaPromo)}%`}</p>
+                    <p className="text-[16px] text-red-100 font-bold">{`${hitungDiskon(
+                      card.hargaNormal,
+                      card.hargaPromo
+                    )}%`}</p>
                   </div>
                   <p className="text-[16px] text-gray-600 font-bold">{`Rp ${card.hargaPromo.toLocaleString()}`}</p>
                 </div>
                 <div className=" flex flex-col gap-y-4">
-                  <p className="text-[14px] text-gray-70 line-clamp-2  lg:line-clamp-3 overflow-hidden">{card.deskripsi}</p>
-                  <p className="text-[14px] text-gray-50 ">Berangkat : {card.keberangkatan}</p>
+                  <p className="text-[14px] text-gray-70 line-clamp-2  lg:line-clamp-3 overflow-hidden">
+                    {card.deskripsi}
+                  </p>
+                  <p className="text-[14px] text-gray-50 ">
+                    Berangkat : {card.keberangkatan}
+                  </p>
                 </div>
               </div>
             </div>

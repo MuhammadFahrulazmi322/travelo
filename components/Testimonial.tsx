@@ -15,8 +15,8 @@ interface Testimonial {
   state: string;
   testimonial: string;
   starTestimonial: number;
-  place : string;
-  date : string;
+  place: string;
+  date: string;
 }
 
 const testimonialsData: Testimonial[] = [
@@ -28,8 +28,8 @@ const testimonialsData: Testimonial[] = [
     testimonial:
       "Nyari makanan halal gampang banget udah ada tour guidenya. tour guidenya juga ramah enak diajak ngobrol, dan penginapannya pun nyaman.",
     starTestimonial: 5,
-    place : "Nusa penida, Bali",
-    date : "17-10-2022"
+    place: "Nusa penida, Bali",
+    date: "17-10-2022",
   },
   {
     image: "/images/testi2.png",
@@ -39,8 +39,8 @@ const testimonialsData: Testimonial[] = [
     testimonial:
       "Perjalanannya nyaman banget ditambah dapet penginapan yang bagus tour tudenya juga baik banget dan ramah, ga nyesel pesen paket travel disini",
     starTestimonial: 4,
-    place : "Nusa penida, Bali",
-    date : "17-10-2022"
+    place: "Nusa penida, Bali",
+    date: "17-10-2022",
   },
   {
     image: "/images/testi3.png",
@@ -50,8 +50,8 @@ const testimonialsData: Testimonial[] = [
     testimonial:
       "Perjalannya asik ga perlu pusing pusing mikirin mau kulineran apa, udah ada tour guidenya. Mau kemana aja juga enak tinggal tanya tour guidenya",
     starTestimonial: 5,
-    place : "Nusa penida, Bali",
-    date : "17-10-2022"
+    place: "Nusa penida, Bali",
+    date: "17-10-2022",
   },
   {
     image: "/images/testi4.png",
@@ -61,8 +61,8 @@ const testimonialsData: Testimonial[] = [
     testimonial:
       "Nyari makanan halal gampang banget udah ada tour guidenya. tour guidenya juga ramah enak diajak ngobrol, dan penginapannya pun nyaman.",
     starTestimonial: 5,
-    place : "Nusa penida, Bali",
-    date : "17-10-2022"
+    place: "Nusa penida, Bali",
+    date: "17-10-2022",
   },
 ];
 
@@ -71,18 +71,16 @@ const Testimonials: React.FC = () => {
     <motion.section
       whileInView={{ y: [100, 0], opacity: [0, 1] }}
       transition={{ duration: 0.5 }}
+      id="testimonial"
       className="px-8"
     >
-        <div>
-            <h1 className="font-bold text-heading-3">Testimoni Pelanggan</h1>
-            <p>Pendapat pelanggan tentang kami</p>
-        </div>
+      <div>
+        <h1 className="font-bold text-heading-3">Testimoni Pelanggan</h1>
+        <p>Pendapat pelanggan tentang kami</p>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-[30px] justify-center ">
         {testimonialsData.map((testimonial, index) => (
-          <div
-            key={index}
-            className=" flex flex-col p-4 py-12 gap-y-4"
-          >
+          <div key={index} className=" flex flex-col p-4 py-12 gap-y-4">
             <div className="flex flex-row items-center gap-x-4 justify-between">
               <div className="flex flex-row items-center gap-x-4">
                 <Image
@@ -117,8 +115,12 @@ const Testimonials: React.FC = () => {
             <p className="font-normal text-[14px] leading-[140%]">
               {testimonial.testimonial}
             </p>
-            <p className="font-bold text-[14px] leading-[140%]">{ testimonial.place}</p>
-            <p className="font-normal text-[12px] text-gray-50 leading-[140%]">{ testimonial.date}</p>
+            <p className="font-bold text-[14px] leading-[140%]">
+              {testimonial.place}
+            </p>
+            <p className="font-normal text-[12px] text-gray-50 leading-[140%]">
+              {testimonial.date}
+            </p>
           </div>
         ))}
       </div>
