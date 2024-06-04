@@ -86,7 +86,8 @@ function Nav() {
             height={32}
             src={data.user.image}
             alt={data.user.fullname}
-            className="rounded-full"
+            className="rounded-full cursor-pointer"
+            onClick={() => router.push("/profile")}
           />
         )}
         <div className="lg:flex hidden flex-row items-center gap-6">

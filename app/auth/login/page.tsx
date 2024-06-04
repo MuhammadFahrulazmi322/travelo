@@ -131,7 +131,7 @@ const Login = () => {
               });
             }}
             variant="contained"
-            className="font-montserrat capitalize rounded-full bg-white text-black font-bold gap-x-2 py-2"
+            className="font-montserrat capitalize rounded-full bg-white text-black font-bold gap-x-2 py-2 hover:none"
           >
             {/* Icon Google */}
             <Image
