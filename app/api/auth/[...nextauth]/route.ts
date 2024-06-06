@@ -51,6 +51,7 @@ const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET || "",
       authorization: {
         params: {
+          scope: 'https://www.googleapis.com/auth/drive.file',
           redirect_uri: `${process.env.NEXTAUTH_URL}/api/auth/callback/google`
         }
       }
