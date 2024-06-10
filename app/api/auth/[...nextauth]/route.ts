@@ -51,8 +51,8 @@ const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET || "",
       authorization: {
         params: {
-          scope: 'https://www.googleapis.com/auth/drive.file',
-          redirect_uri: `${process.env.NEXTAUTH_URL}/api/auth/callback/google`
+          scope: 'openid profile email https://www.googleapis.com/auth/drive.file',
+          redirect_uri: `${process.env.NEXTAUTH_URL}/api/auth/callback/google`,
         }
       }
     }),
@@ -66,6 +66,7 @@ const authOptions: NextAuthOptions = {
       }
       if (account?.provider === "google") {
         const data = {
+          accessToken: account.access_token,
           email: user.email,
           fullname: user.name,
           image: user.image,
@@ -73,6 +74,7 @@ const authOptions: NextAuthOptions = {
         };
         await signInWithGoogle(data, (result: any) => {
           if (result.status) {
+            token.accessToken = account.access_token;
             token.email = result.data.email;
             token.fullname = result.data.fullname;
             token.image = result.data.image;
@@ -95,6 +97,9 @@ const authOptions: NextAuthOptions = {
       }
       if ("role" in token) {
         session.user.role = token.role;
+      }
+      if ("accessToken" in token) {
+        session.accessToken = token.accessToken;
       }
       return session;
     },
