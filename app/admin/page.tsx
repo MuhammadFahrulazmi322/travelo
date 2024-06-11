@@ -112,27 +112,82 @@ const Admin = () => {
     e.preventDefault();
     let imageUrl = form.imageUrl;
     let detailImages: string[] = [];
-
+  
     if (form.imageFile) {
       try {
-        imageUrl = await uploadImageToDrive(form.imageFile);
+        const file = await new Promise<string | ArrayBuffer | null>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result);
+          reader.onerror = () => reject(reader.error);
+          if (form.imageFile) {
+            reader.readAsDataURL(form.imageFile);
+          }
+        });
+  
+        if (typeof file === 'string') {
+          const response = await fetch('/api/upload', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${session?.accessToken}`,
+            },
+            body: JSON.stringify({ file }),
+          });
+  
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Error uploading image');
+          }
+  
+          const data = await response.json();
+          imageUrl = data.url;
+        }
       } catch (error) {
         console.error("Error uploading image: ", error);
         alert("Error uploading image. Please try again.");
         return;
       }
     }
-
+  
+    // Upload detail images (if any)
     if (form.detailImageFiles && form.detailImageFiles.length > 0) {
       try {
-        detailImages = await Promise.all(form.detailImageFiles.map((file: File) => uploadImageToDrive(file)));
+        detailImages = await Promise.all(form.detailImageFiles.map(async (file: File) => {
+          const fileData = await new Promise<string | ArrayBuffer | null>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.onerror = () => reject(reader.error);
+            reader.readAsDataURL(file);
+          });
+  
+          if (typeof fileData === 'string') {
+            const response = await fetch('/api/upload', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${session?.accessToken}`,
+              },
+              body: JSON.stringify({ file: fileData }),
+            });
+  
+            if (!response.ok) {
+              const errorData = await response.json();
+              throw new Error(errorData.error || 'Error uploading detail images');
+            }
+  
+            const data = await response.json();
+            return data.url;
+          }
+          return '';
+        }));
       } catch (error) {
         console.error("Error uploading detail images: ", error);
         alert("Error uploading detail images. Please try again.");
         return;
       }
     }
-
+  
+    // Handle the rest of your form submission logic...
     const productData = getProductData({ ...form, imageUrl, detailImages });
     try {
       if (editId) {
@@ -166,11 +221,12 @@ const Admin = () => {
       console.error("Error uploading product: ", error);
       alert("Error uploading product. Please try again.");
     }
-
+  
     const productsCollection = collection(db, 'products');
     const productsSnapshot = await getDocs(productsCollection);
     setProducts(productsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Product)));
   };
+  
 
   const handleEdit = (product: Product) => {
     setForm(product);
