@@ -239,7 +239,7 @@ const Admin = () => {
   };
 
   return (
-    <div className="p-6 bg-white min-h-screen">
+    <div className="flex flex-col p-6 bg-white min-h-screen justify-center items-center">
       <h1 className="text-2xl font-bold mb-6">Admin Panel</h1>
       <form onSubmit={handleSubmit} className="mb-6 space-y-4">
         <div className="grid grid-cols-1 gap-4">
